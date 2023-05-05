@@ -6,10 +6,23 @@ No Backup, No Mercy.
 
 ## Usage
 
-### Instalation
+> Depending on your os it could be `python3`, `pyhon` or something completely different.
 
-```sh
+### Installation
+
+```shell
 # go to the desired installation path
 
+# downloading the repository
 git clone https://github.com/Lewd-Heal-Girl/save-your-subs.git
+
+# installing the dependencies 
+cd save_your_subs
+python3 -m pip install -r requirements.txt
+```
+
+### Run
+
+```shell
+python3 -m save_your_subs r/HealSluts
 ```
