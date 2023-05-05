@@ -36,7 +36,8 @@ options:
   -h, --help  show this help message and exit
 ```
 
-## Funktionalities
+## Functionalities
 
 - [ ] Download the Metadata from every reddit Post on a subreddit.
 - [ ] Downloading all Imgur Pictures from the reddit Posts.
+
