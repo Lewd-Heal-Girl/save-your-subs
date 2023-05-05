@@ -14,4 +14,4 @@ def cli(subreddit: str):
 
         print(post_queue.get())
 
-    print("ending main thread")
+    print("Terminating the main thread.")
