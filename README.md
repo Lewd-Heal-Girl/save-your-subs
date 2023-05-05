@@ -19,7 +19,7 @@ git clone https://github.com/Lewd-Heal-Girl/save-your-subs.git
 # installing the dependencies 
 cd save_your_subs
 python3 -m pip install -r requirements.txt
-mkdir "your-loyal-subs"
+mkdir "subs-stashed-away"
 ```
 
 ### Run
