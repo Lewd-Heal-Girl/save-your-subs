@@ -19,6 +19,7 @@ git clone https://github.com/Lewd-Heal-Girl/save-your-subs.git
 # installing the dependencies 
 cd save_your_subs
 python3 -m pip install -r requirements.txt
+mkdir "your-loyal-subs"
 ```
 
 ### Run
@@ -26,3 +27,16 @@ python3 -m pip install -r requirements.txt
 ```shell
 python3 -m save_your_subs r/HealSluts
 ```
+
+```
+positional arguments:
+  sub         your little sub (r/your_sub)
+
+options:
+  -h, --help  show this help message and exit
+```
+
+## Funktionalities
+
+- [ ] Download the Metadata from every reddit Post on a subreddit.
+- [ ] Downloading all Imgur Pictures from the reddit Posts.
