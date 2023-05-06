@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List, Tuple
 
+from slugify import slugify
+
 example = {
     "approved_at_utc": None,
     "subreddit": "HentaiBondageTales",
@@ -170,7 +172,7 @@ class Media:
 
 @dataclass
 class MediaGallery(Media):
-    json: dict
+    json: dict = None
 
     @property
     def id(self):
@@ -186,7 +188,7 @@ class MediaGallery(Media):
 
 @dataclass
 class MediaPreview(Media):
-    json: dict
+    json: dict = None
 
     @property
     def id(self) -> str:
@@ -230,6 +232,10 @@ class Post:
         return self.json.get("author")
 
     @property
+    def folder(self) -> str:
+        return slugify(f"{self.id} {self.title}")
+
+    @property
     def media(self) -> List[Media]:
         """
         "gallery_data": {"items": [
@@ -237,7 +243,7 @@ class Post:
             {"media_id": "v8dmkhn60vxa1", "id": 271145195}
         ]}
         """
-        media_list = [MediaPreview(image) for image in self.json.get("preview", dict()).get("images", list())]
+        media_list = [MediaPreview(json=image) for image in self.json.get("preview", dict()).get("images", list())]
 
         media_id_list = [item.get("media_id") for item in self.json.get("gallery_data", dict()).get("items", [])]
         media_metadata = self.json.get("media_metadata", {})

@@ -37,7 +37,6 @@ def download_subreddit(subreddit: str, result_queue: Queue):
             print(r.status_code)
             data: dict = r.json()
 
-
         except requests.RequestException:
             print("reddit request failed")
 
