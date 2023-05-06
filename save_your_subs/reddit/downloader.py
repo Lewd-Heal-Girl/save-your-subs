@@ -4,7 +4,8 @@ import requests
 from .classes import Post
 
 MAX_LIMIT = 100
-ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after{last_id}"
+ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after={last_id}"
+
 
 def download_subreddit(subreddit: str, result_queue: Queue):
     print("downloading", subreddit)
@@ -18,10 +19,15 @@ def download_subreddit(subreddit: str, result_queue: Queue):
     last_id = ''
     limit = MAX_LIMIT
 
+    last_post = None
+
     for i in range(10):
         data = dict()
 
         try:
+            if last_post is not None:
+                last_id = last_post.id
+
             r = session.get(ENDPOINT.format(
                 subreddit=subreddit,
                 limit=limit,
@@ -39,7 +45,8 @@ def download_subreddit(subreddit: str, result_queue: Queue):
             continue
 
         for post in data.get("data", {}).get("children", []):
-            result_queue.put(Post(json=post.get("data", {})))
+            last_post = Post(json=post.get("data", {}))
+            result_queue.put(last_post)
 
         # result_queue.put(str(i))
 
