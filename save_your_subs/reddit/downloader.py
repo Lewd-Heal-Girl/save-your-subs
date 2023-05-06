@@ -48,6 +48,4 @@ def download_subreddit(subreddit: str, result_queue: Queue):
             last_post = Post(json=post.get("data", {}))
             result_queue.put(last_post)
 
-        # result_queue.put(str(i))
-
     print("Terminating the reddit thread.")
