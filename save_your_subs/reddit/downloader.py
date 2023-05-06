@@ -21,7 +21,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
     last_post = None
 
-    for i in range(10):
+    for i in range(1):
         data = dict()
 
         try:

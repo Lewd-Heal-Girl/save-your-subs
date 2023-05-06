@@ -22,7 +22,9 @@ class Processor:
         self.data_path = data_path
 
     def process(self, post: Post):
-        print(post)
+        print(post, len(post.media))
+        for media in post.media:
+            print("\t", media.url, media.resolution)
 
         sub_path = Path(self.data_path, post.subreddit)
         sub_path.mkdir(parents=True, exist_ok=True)
@@ -31,4 +33,4 @@ class Processor:
         post_path.mkdir(parents=True, exist_ok=True)
 
         with Path(post_path, f"{post.id}.json").open("w") as f:
-            json.dump(post.json, f)
+            json.dump(post.json, f, indent=4)
