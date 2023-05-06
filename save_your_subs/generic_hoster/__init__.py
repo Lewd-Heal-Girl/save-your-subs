@@ -1,1 +1,1 @@
-from .classes import DownloadRequest
+from .classes import DownloadRequest, HaveSomeRestComrade
