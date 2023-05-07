@@ -247,6 +247,13 @@ class MediaPreview(Media):
         return self.json.get("source", dict()).get("width", 0), self.json.get("source", dict()).get("height", 0)
 
 
+class ImgurMedia(Media):
+    @property
+    def id(self) -> str:
+        url_frag = self.url.strip("/").split("/")[-1]
+        return url_frag.split(".")[0]
+
+
 @dataclass
 class Post:
     json: dict
@@ -281,6 +288,11 @@ class Post:
 
     @property
     def media(self) -> List[Media]:
+        if "url_overridden_by_dest" in self.json:
+            url_overridden_by_dest: str = self.json.get("url_overridden_by_dest")
+            if url_overridden_by_dest.startswith("https://imgur.com"):
+                return [ImgurMedia(url=url_overridden_by_dest)]
+
         """
         "gallery_data": {"items": [
             {"media_id": "g7doc1f60vxa1", "id": 271145194},

@@ -2,8 +2,8 @@ from pathlib import Path
 import json
 from queue import Queue
 
-from .reddit import Post
-from .generic_hoster import DownloadRequest
+from .utils import DownloadRequest
+from .reddit import Post, ImgurMedia
 
 DATA_PATH = Path("subs-stashed-away")
 
@@ -37,9 +37,15 @@ class Processor:
 
         print(post, len(post.media))
         for i, media in enumerate(post.media):
-            self.general_queue.put(DownloadRequest(
+            new_request = DownloadRequest(
                 media=media,
                 n=i,
                 folder=image_path
-            ))
+            )
+            if isinstance(media, ImgurMedia):
+                print(f"Imgur: {media.url}")
+                self.imgur_queue.put(new_request)
+                continue
+
+            self.general_queue.put(new_request)
             print("\t", media.url, media.resolution)
