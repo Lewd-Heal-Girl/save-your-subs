@@ -6,7 +6,24 @@ from pathlib import Path
 from ..utils import HaveSomeRestComrade, DownloadRequest
 from ..reddit import ImgurMedia
 
-API_ENDPOINT = "https://api.imgur.com/post/v1/albums/{imgur_id}?include=media"
+"""
+find the client id in this java script file:
+https://s.imgur.com/desktop-assets/js/main.bbbc7a722b2bd27c7035.js
+
+it is near to a string which is as follows:
+`l=window.location.hostname,d="localhost"===l?"imgur.com"`
+
+and is a value of "y" 
+`3e0",y="546c25a59c58ad7",b="6Ldqe`
+
+it matches the regex: `(?<=",y=").*?(?=",b=")`
+"""
+
+# client id
+# 546c25a59c58ad7
+
+CLIENT_ID = "546c25a59c58ad7"
+API_ENDPOINT = "https://api.imgur.com/post/v1/albums/{imgur_id}?include=media&client_id={client_id}"
 COMRAD_COUNT = 1
 
 
@@ -32,8 +49,10 @@ class ImgurComrade(threading.Thread):
         threading.Thread.__init__(self)
 
     def download_single(self, url: str, folder: Path, n: int):
+        print(f"downloading: {url}")
         try:
             r = self.image_session.get(url)
+            print(r.status_code)
         except requests.RequestException:
             return
 
@@ -41,17 +60,24 @@ class ImgurComrade(threading.Thread):
 
         img_format = url.split(".")[-1]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
+
+        print("new path", new_path)
         with new_path.open("wb") as f:
             f.write(r.content)
 
     def download_galerie(self, media_id: str, folder: Path):
         media = []
 
+        url = API_ENDPOINT.format(imgur_id=media_id, client_id=CLIENT_ID)
+
+        # print(f"api call: {url}")
         try:
-            r = self.api_session.get(url=API_ENDPOINT.format(imgur_id=media_id))
-            print(r.status_code)
+            r = self.api_session.get(url=url)
+            # print(r.status_code)
 
             media = r.json().get("media", list())
+            if r.status_code != 200:
+                print(f"{url} responded with {r.status_code}")
 
         except requests.RequestException:
             print("Couldn't connect to imgur")

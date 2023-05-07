@@ -21,7 +21,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
     last_post = None
 
-    for i in range(10):
+    while True:
         data = dict()
 
         try:
@@ -34,7 +34,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
                 last_id=last_id
             ))
 
-            print(r.status_code)
+            # print(r.status_code)
             data: dict = r.json()
 
         except requests.RequestException:
@@ -43,8 +43,13 @@ def download_subreddit(subreddit: str, result_queue: Queue):
         if data.get("kind") != "Listing":
             continue
 
+        _last_post = last_post
+
         for post in data.get("data", {}).get("children", []):
             last_post = Post(json=post.get("data", {}))
             result_queue.put(last_post)
+
+        if _last_post == last_post:
+            break
 
     print("Terminating the reddit thread.")

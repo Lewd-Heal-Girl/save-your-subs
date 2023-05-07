@@ -35,7 +35,7 @@ class Processor:
         with Path(post_path, f"{post.id}.json").open("w") as f:
             json.dump(post.json, f, indent=4)
 
-        print(post, len(post.media))
+        # print(post, len(post.media))
         for i, media in enumerate(post.media):
             new_request = DownloadRequest(
                 media=media,
@@ -43,9 +43,9 @@ class Processor:
                 folder=image_path
             )
             if isinstance(media, ImgurMedia):
-                print(f"Imgur: {media.url}")
+                # print(f"Imgur: {media.url}")
                 self.imgur_queue.put(new_request)
                 continue
 
             self.general_queue.put(new_request)
-            print("\t", media.url, media.resolution)
+            # print("\t", media.url, media.resolution)
