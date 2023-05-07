@@ -1,1 +1,1 @@
-from .comrade import spawn_imgur_comrades
+from .imgur_comrade import spawn_imgur_comrades

@@ -39,7 +39,7 @@ options:
 
 - [x] Download the Metadata from every reddit Post on a subreddit.
 - [x] Downloading all Imgur Pictures from the reddit Posts.
-- [ ] Downloading all pictures from all posts
+- [x] Downloading all pictures from all posts
 
 # Imgur
 

@@ -48,4 +48,4 @@ class Processor:
                 continue
 
             self.general_queue.put(new_request)
-            print("\t", media.url, media.resolution)
+            # print("\t", media.url, media.resolution)

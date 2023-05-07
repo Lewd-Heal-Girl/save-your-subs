@@ -1,1 +1,1 @@
-from .classes import DownloadRequest, HaveSomeRestComrade
+from .generic_comrade import spawn_generic_comrades
