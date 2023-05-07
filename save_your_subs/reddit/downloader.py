@@ -4,7 +4,7 @@ import requests
 from .classes import Post
 
 MAX_LIMIT = 100
-ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after={last_id}"
+ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after={last_id}&count={count}"
 
 
 def download_subreddit(subreddit: str, result_queue: Queue):
@@ -16,11 +16,12 @@ def download_subreddit(subreddit: str, result_queue: Queue):
         "Connection": "Keep-Alive"
     }
 
+    total_posts = 0
+
     last_id = ''
     limit = MAX_LIMIT
 
     last_post = None
-
     while True:
         data = dict()
 
@@ -31,10 +32,11 @@ def download_subreddit(subreddit: str, result_queue: Queue):
             r = session.get(ENDPOINT.format(
                 subreddit=subreddit,
                 limit=limit,
-                last_id=last_id
+                last_id=last_id,
+                count=total_posts
             ))
 
-            # print(r.status_code)
+            print(r.status_code)
             data: dict = r.json()
 
         except requests.RequestException:
@@ -47,9 +49,16 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
         for post in data.get("data", {}).get("children", []):
             last_post = Post(json=post.get("data", {}))
+            print(last_post)
             result_queue.put(last_post)
 
+            total_posts += 1
+
         if _last_post == last_post:
+            print("The last Post was reached:")
+            print(last_post)
+            print(last_post.id)
+            print(f"total posts: {total_posts}")
             break
 
     print("Terminating the reddit thread.")

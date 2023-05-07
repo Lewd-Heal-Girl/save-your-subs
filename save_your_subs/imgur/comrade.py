@@ -24,7 +24,7 @@ it matches the regex: `(?<=",y=").*?(?=",b=")`
 
 CLIENT_ID = "546c25a59c58ad7"
 API_ENDPOINT = "https://api.imgur.com/post/v1/albums/{imgur_id}?include=media&client_id={client_id}"
-COMRAD_COUNT = 1
+COMRAD_COUNT = 3
 
 
 class ImgurComrade(threading.Thread):
@@ -49,19 +49,19 @@ class ImgurComrade(threading.Thread):
         threading.Thread.__init__(self)
 
     def download_single(self, url: str, folder: Path, n: int):
-        print(f"downloading: {url}")
+        # print(f"downloading: {url}")
         try:
             r = self.image_session.get(url)
-            print(r.status_code)
+            # print(r.status_code)
         except requests.RequestException:
             return
 
         folder.mkdir(parents=True, exist_ok=True)
 
-        img_format = url.split(".")[-1]
+        img_format = url.split(".")[-1].split("?")[0]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
-        print("new path", new_path)
+        print(url, "->", new_path)
         with new_path.open("wb") as f:
             f.write(r.content)
 
@@ -104,6 +104,9 @@ class ImgurComrade(threading.Thread):
 
             command: DownloadRequest
             self.download(command=command)
+
+        # gotta tell another worker to rest
+        self.work_queue.put(HaveSomeRestComrade)
 
 
 def spawn_imgur_comrades(comrad_count: int = COMRAD_COUNT) -> Queue:

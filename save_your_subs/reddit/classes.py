@@ -284,13 +284,13 @@ class Post:
 
     @property
     def folder(self) -> str:
-        return slugify(f"{self.id} {self.title}")
+        return slugify(f"{self.id} {self.title}")[:254]
 
     @property
     def media(self) -> List[Media]:
         if "url_overridden_by_dest" in self.json:
             url_overridden_by_dest: str = self.json.get("url_overridden_by_dest")
-            if url_overridden_by_dest.startswith("https://imgur.com"):
+            if url_overridden_by_dest.startswith("https://imgur.com") or url_overridden_by_dest.startswith("https://i.imgur.com"):
                 return [ImgurMedia(url=url_overridden_by_dest)]
 
         """
