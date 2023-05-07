@@ -16,7 +16,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
         "Connection": "Keep-Alive"
     }
 
-    last_id = ''
+    last_id = 't3_104kb31'
     limit = MAX_LIMIT
 
     last_post = None

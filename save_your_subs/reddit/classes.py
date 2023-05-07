@@ -28,19 +28,43 @@ example = {
             "status": "valid",
             "e": "Image",
             "m": "image/png",
-            "o": [{"y": 1704, "x": 2316, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e155368b6df7348e6aa5e259c7f203c405fd5514"}],
+            "o": [{"y": 1704, "x": 2316,
+                   "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e155368b6df7348e6aa5e259c7f203c405fd5514"}],
             "p": [
-                {"y": 79, "x": 108, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=55e53e5174f94d9767bc8042cb69e6593be00a21"},
-                {"y": 158, "x": 216, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=1bd4de25d8d8c600467c40c984f1edd6b652c8b0"},
-                {"y": 235, "x": 320, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=e7ee2f335ce11a1f461720464fc0878a4d0b200f"},
-                {"y": 470, "x": 640, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=ab6cc54c16fc97d0dd646dc1d3ae4c00cf88695e"},
-                {"y": 706, "x": 960, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=d0616a5a7f24e1a7f68a6d48b8ffba8bea54d9d3"},
-                {"y": 794, "x": 1080, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=006e88894394def39f3266b1093983d359499b20"}
+                {"y": 79, "x": 108,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=55e53e5174f94d9767bc8042cb69e6593be00a21"},
+                {"y": 158, "x": 216,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=1bd4de25d8d8c600467c40c984f1edd6b652c8b0"},
+                {"y": 235, "x": 320,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=e7ee2f335ce11a1f461720464fc0878a4d0b200f"},
+                {"y": 470, "x": 640,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=ab6cc54c16fc97d0dd646dc1d3ae4c00cf88695e"},
+                {"y": 706, "x": 960,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=d0616a5a7f24e1a7f68a6d48b8ffba8bea54d9d3"},
+                {"y": 794, "x": 1080,
+                 "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=006e88894394def39f3266b1093983d359499b20"}
             ],
-            "s": {"y": 1704, "x": 2316, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=9d3bdbc8f85be08c514383cc1e2cf23908b97a0c"},
+            "s": {"y": 1704, "x": 2316,
+                  "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=9d3bdbc8f85be08c514383cc1e2cf23908b97a0c"},
             "id": "v8dmkhn60vxa1"
         },
-        "g7doc1f60vxa1": {"status": "valid", "e": "Image", "m": "image/png", "o": [{"y": 1704, "x": 2316, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=97ec2c25ad77cab3d52d1d23fc02449d95ce4688"}], "p": [{"y": 79, "x": 108, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=095c27ba2cce8e7b75e27938663fd92d98b38219"}, {"y": 158, "x": 216, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=0de8370efdb994126661d55fc0d78ec23d147e52"}, {"y": 235, "x": 320, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a6f43055b7fa697f95c21e0141d69260e1036fa2"}, {"y": 470, "x": 640, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=c31d4637ecfd19ee996944e4e9827348e5ea7631"}, {"y": 706, "x": 960, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a9e55f6281e803abfe229f5018f8290143d9c81b"}, {"y": 794, "x": 1080, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a77bba8befd72a2b295c3d6185b1ec21dabc72dc"}], "s": {"y": 1704, "x": 2316, "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=75ef71e1495ae28efd1c4338d5749f4657ee5f80"}, "id": "g7doc1f60vxa1"}
+        "g7doc1f60vxa1": {"status": "valid", "e": "Image", "m": "image/png", "o": [{"y": 1704, "x": 2316,
+                                                                                    "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=97ec2c25ad77cab3d52d1d23fc02449d95ce4688"}],
+                          "p": [{"y": 79, "x": 108,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=095c27ba2cce8e7b75e27938663fd92d98b38219"},
+                                {"y": 158, "x": 216,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=0de8370efdb994126661d55fc0d78ec23d147e52"},
+                                {"y": 235, "x": 320,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a6f43055b7fa697f95c21e0141d69260e1036fa2"},
+                                {"y": 470, "x": 640,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=c31d4637ecfd19ee996944e4e9827348e5ea7631"},
+                                {"y": 706, "x": 960,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a9e55f6281e803abfe229f5018f8290143d9c81b"},
+                                {"y": 794, "x": 1080,
+                                 "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=a77bba8befd72a2b295c3d6185b1ec21dabc72dc"}],
+                          "s": {"y": 1704, "x": 2316,
+                                "u": "https://preview.redd.it/g7doc1f60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=75ef71e1495ae28efd1c4338d5749f4657ee5f80"},
+                          "id": "g7doc1f60vxa1"}
     },
     "name": "t3_137vxcf",
     "quarantine": False,
@@ -117,11 +141,11 @@ example = {
     "id": "137vxcf",
     "is_robot_indexable": True,
     "report_reasons": None,
-    "author": "Klutzy_Arachnid9172", 
-    "discussion_type": None, 
-    "num_comments": 3, 
-    "send_replies": True, 
-    "whitelist_status": None, 
+    "author": "Klutzy_Arachnid9172",
+    "discussion_type": None,
+    "num_comments": 3,
+    "send_replies": True,
+    "whitelist_status": None,
     "contest_mode": False,
     "mod_reports": [],
     "author_patreon_flair": False,
@@ -137,42 +161,60 @@ example = {
     "is_video": False
 }
 
-
-
 example = {
     "status": "valid",
     "e": "Image",
     "m": "image/png",
-    "o": [{"y": 1704, "x": 2316, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e155368b6df7348e6aa5e259c7f203c405fd5514"}],
+    "o": [{"y": 1704, "x": 2316,
+           "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;blur=40&amp;format=pjpg&amp;auto=webp&amp;v=enabled&amp;s=e155368b6df7348e6aa5e259c7f203c405fd5514"}],
     "p": [
-        {"y": 79, "x": 108, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=55e53e5174f94d9767bc8042cb69e6593be00a21"},
-        {"y": 158, "x": 216, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=1bd4de25d8d8c600467c40c984f1edd6b652c8b0"},
-        {"y": 235, "x": 320, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=e7ee2f335ce11a1f461720464fc0878a4d0b200f"},
-        {"y": 470, "x": 640, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=ab6cc54c16fc97d0dd646dc1d3ae4c00cf88695e"},
-        {"y": 706, "x": 960, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=d0616a5a7f24e1a7f68a6d48b8ffba8bea54d9d3"},
-        {"y": 794, "x": 1080, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=006e88894394def39f3266b1093983d359499b20"}
+        {"y": 79, "x": 108,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=108&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=55e53e5174f94d9767bc8042cb69e6593be00a21"},
+        {"y": 158, "x": 216,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=216&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=1bd4de25d8d8c600467c40c984f1edd6b652c8b0"},
+        {"y": 235, "x": 320,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=320&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=e7ee2f335ce11a1f461720464fc0878a4d0b200f"},
+        {"y": 470, "x": 640,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=640&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=ab6cc54c16fc97d0dd646dc1d3ae4c00cf88695e"},
+        {"y": 706, "x": 960,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=960&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=d0616a5a7f24e1a7f68a6d48b8ffba8bea54d9d3"},
+        {"y": 794, "x": 1080,
+         "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;v=enabled&amp;s=006e88894394def39f3266b1093983d359499b20"}
     ],
-    "s": {"y": 1704, "x": 2316, "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=9d3bdbc8f85be08c514383cc1e2cf23908b97a0c"},
+    "s": {"y": 1704, "x": 2316,
+          "u": "https://preview.redd.it/v8dmkhn60vxa1.png?width=2316&amp;format=png&amp;auto=webp&amp;v=enabled&amp;s=9d3bdbc8f85be08c514383cc1e2cf23908b97a0c"},
     "id": "v8dmkhn60vxa1"
 }
 
-@dataclass
+
 class Media:
+    def __init__(
+            self,
+            id: str = None,
+            url: str = None,
+            resolution: Tuple[int, int] = None
+    ):
+        self._id: str = id
+        self._url: str = url
+        self._resolution: True[int, int] = resolution or (0, 0)
+
     @property
     def id(self) -> str:
-        raise NotImplementedError("use a subclass of Media")
+        return self._id
 
     @property
     def url(self) -> str:
-        raise NotImplementedError("use a subclass of Media")
+        return self._url
 
     @property
     def resolution(self) -> Tuple[int, int]:
-        raise NotImplementedError("use a subclass of Media")
+        return self._resolution
 
-@dataclass
+
 class MediaGallery(Media):
-    json: dict = None
+    def __init__(self, json: dict):
+        super().__init__()
+        self.json: dict = json
 
     @property
     def id(self):
@@ -186,9 +228,11 @@ class MediaGallery(Media):
     def resolution(self) -> Tuple[int, int]:
         return self.json.get("s", dict()).get("x"), self.json.get("s", dict()).get("y")
 
-@dataclass
+
 class MediaPreview(Media):
-    json: dict = None
+    def __init__(self, json: dict):
+        super().__init__()
+        self.json: dict = json
 
     @property
     def id(self) -> str:
@@ -253,5 +297,3 @@ class Post:
 
     def __str__(self):
         return f"{self.date} r/{self.subreddit} - {self.title} ({self.flair}) by u/{self.artist}"
-
-
