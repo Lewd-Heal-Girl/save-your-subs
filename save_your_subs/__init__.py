@@ -14,7 +14,8 @@ def cli(subreddit: str):
     post_queue, reddit_thread = start_download(subreddit.replace("r/", "", 1))
 
     generic_work_queue = Queue()
-    imgur_queue = spawn_imgur_comrades()
+    # imgur_queue = spawn_imgur_comrades()
+    imgur_queue = Queue()
 
     processor = Processor(
         reddit_queue=post_queue,
