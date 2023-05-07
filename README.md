@@ -38,8 +38,8 @@ options:
 ## Functionalities
 
 - [x] Download the Metadata from every reddit Post on a subreddit.
-- [ ] Downloading all Imgur Pictures from the reddit Posts.
-- [ ] Downloading all pictures from all Posts
+- [x] Downloading all Imgur Pictures from the reddit Posts.
+- [ ] Downloading all pictures from all posts
 
 # Imgur
 
@@ -48,7 +48,7 @@ options:
 - Example for Single: `https://i.imgur.com/DeYIbo6.png"`
 - Example for Gallery: `https://imgur.com/a/zpCKPPs`
 
-Thus if there is a `.{format}`, then the picture is a single picture. If not it is a gallery.
+Thus, if there is a `.{format}`, then the picture is a single picture. If not it is a gallery.
 
 If the picture is only one, it can be called directly, else following stepts need to be taken:
 
