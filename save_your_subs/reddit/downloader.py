@@ -16,12 +16,12 @@ def download_subreddit(subreddit: str, result_queue: Queue):
         "Connection": "Keep-Alive"
     }
 
-    last_id = 't3_104kb31'
+    last_id = ''
     limit = MAX_LIMIT
 
     last_post = None
 
-    for i in range(1):
+    for i in range(10):
         data = dict()
 
         try:

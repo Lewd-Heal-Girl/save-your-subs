@@ -309,3 +309,4 @@ class Post:
 
     def __str__(self):
         return f"{self.date} r/{self.subreddit} - {self.title} ({self.flair}) by u/{self.artist}"
+

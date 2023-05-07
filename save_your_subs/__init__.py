@@ -1,6 +1,7 @@
 from queue import Queue
 
-from .generic_hoster import spawn_comrades, HaveSomeRestComrade
+from .utils import HaveSomeRestComrade
+from .imgur import spawn_imgur_comrades
 from .reddit import start_download
 from .process_post import Processor
 
@@ -12,10 +13,12 @@ def cli(subreddit: str):
 
     post_queue, reddit_thread = start_download(subreddit.replace("r/", "", 1))
 
-    generic_work_queue = spawn_comrades.spawn_comrades()
+    generic_work_queue = Queue()
+    imgur_queue = spawn_imgur_comrades()
+
     processor = Processor(
         reddit_queue=post_queue,
-        imgur_queue=Queue(),
+        imgur_queue=imgur_queue,
         general_queue=generic_work_queue
     )
 
@@ -26,4 +29,5 @@ def cli(subreddit: str):
         processor.process(post_queue.get())
 
     generic_work_queue.put(HaveSomeRestComrade)
+    imgur_queue.put(HaveSomeRestComrade)
     print("Terminating the main thread.")

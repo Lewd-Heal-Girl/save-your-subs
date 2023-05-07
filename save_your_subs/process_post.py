@@ -30,7 +30,7 @@ class Processor:
         post_path.mkdir(parents=True, exist_ok=True)
 
         image_path = Path(sub_path, "images", post.folder)
-        image_path.mkdir(parents=True, exist_ok=True)
+        # image_path.mkdir(parents=True, exist_ok=True)
 
         with Path(post_path, f"{post.id}.json").open("w") as f:
             json.dump(post.json, f, indent=4)
