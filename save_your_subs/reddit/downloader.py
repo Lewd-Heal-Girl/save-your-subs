@@ -36,7 +36,8 @@ def download_subreddit(subreddit: str, result_queue: Queue):
                 count=total_posts
             ))
 
-            print(r.status_code)
+            if r.status_code != 200:
+                print(r.status_code)
             data: dict = r.json()
 
         except requests.RequestException:

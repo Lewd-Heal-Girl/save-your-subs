@@ -10,9 +10,9 @@ from .generic_hoster import spawn_generic_comrades
 
 logging.basicConfig(
     filename="errors.log",
-    filemode='a',
+    filemode='w',
     format=logging.BASIC_FORMAT,
-    level=logging.DEBUG
+    level=logging.INFO
 )
 
 

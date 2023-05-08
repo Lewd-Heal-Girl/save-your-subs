@@ -111,8 +111,8 @@ class Post:
 
     def _get_reddit_gallery(self, json: dict):
 
-        media_id_list = [item.get("media_id") for item in self.json.get("gallery_data", dict()).get("items", [])]
-        media_metadata = self.json.get("media_metadata", {})
+        media_id_list = [item.get("media_id") for item in json.get("gallery_data", dict()).get("items", [])]
+        media_metadata = json.get("media_metadata", {})
 
         return [RedditGallery(json=media_metadata.get(str(_id), dict())) for _id in media_id_list]
 
