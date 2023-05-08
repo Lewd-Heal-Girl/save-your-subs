@@ -65,7 +65,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
         if _last_post == last_post and not weird_status_code:
             print("The last Post was reached:")
-            print(last_post)
+            LOGGER.info(str(last_post))
             LOGGER.info(f"{last_post.id}: last post")
             LOGGER.info(f"Total posts: {total_posts}")
             break

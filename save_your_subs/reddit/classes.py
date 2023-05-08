@@ -51,7 +51,7 @@ class RedditGallery(Media):
     @property
     def url(self) -> str:
         parsed = urlparse(self.json.get("s", dict()).get("u"))
-        return "https://i.redd.it" + parsed.path
+        return "https://i.redd.it" + str(parsed.path)
 
     @property
     def resolution(self) -> Tuple[int, int]:
