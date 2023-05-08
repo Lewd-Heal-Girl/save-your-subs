@@ -54,7 +54,7 @@ class ImgurComrade(threading.Thread):
         threading.Thread.__init__(self)
 
     def download_single(self, url: str, folder: Path, n: int, id_: str):
-        img_format = url.split(".")[-1].split("?")[0]
+        img_format = url.split(".", 1)[-1].split("?")[0]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         if new_path.is_file():

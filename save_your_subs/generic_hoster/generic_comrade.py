@@ -30,7 +30,7 @@ class GenericComrade(threading.Thread):
         url = command.media.url
         n = command.n
 
-        img_format = url.split(".")[-1].split("?")[0]
+        img_format = url.split(".", 1)[-1].split("?")[0]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         if new_path.is_file():

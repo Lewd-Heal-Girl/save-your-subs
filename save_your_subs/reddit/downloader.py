@@ -7,7 +7,7 @@ from .classes import Post
 LOGGER = logging.getLogger("reddit")
 
 MAX_LIMIT = 100
-ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after={last_id}&count={count}"
+ENDPOINT = "https://www.reddit.com/r/{subreddit}/top.json?limit={limit}&after={last_id}&count={count}&t=all"
 
 
 def download_subreddit(subreddit: str, result_queue: Queue):
