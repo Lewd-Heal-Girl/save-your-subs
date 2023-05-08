@@ -59,4 +59,4 @@ class Processor:
             # print("\t", media.url, media.resolution)
             
         if not has_media:
-            LOGGER.error(f"{post.id}: Didn't find any media.")
+            LOGGER.error(f"{post.id}: Didn't find any media. {post.url}")

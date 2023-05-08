@@ -54,7 +54,13 @@ class ImgurComrade(threading.Thread):
         threading.Thread.__init__(self)
 
     def download_single(self, url: str, folder: Path, n: int, id_: str):
-        # print(f"downloading: {url}")
+        img_format = url.split(".")[-1].split("?")[0]
+        new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
+
+        if new_path.is_file():
+            print(f"{new_path} already exists")
+            return
+
         try:
             r = self.image_session.get(url)
             if r.status_code != 200:
@@ -65,9 +71,6 @@ class ImgurComrade(threading.Thread):
             return
 
         folder.mkdir(parents=True, exist_ok=True)
-
-        img_format = url.split(".")[-1].split("?")[0]
-        new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         print(url, "->", new_path)
         with new_path.open("wb") as f:
@@ -82,6 +85,8 @@ class ImgurComrade(threading.Thread):
             r = self.api_session.get(url=url)
 
             media = r.json().get("media", list())
+            if r.status_code == 404:
+                return
             if r.status_code != 200:
                 LOGGER.warning(f"{id_}: {url} responded with {r.status_code}")
 

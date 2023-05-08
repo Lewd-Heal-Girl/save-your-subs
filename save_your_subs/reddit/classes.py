@@ -88,6 +88,10 @@ class Post:
     json: dict
 
     @property
+    def url(self) -> str:
+        return "https://www.reddit.com" + self.json.get("permalink")
+
+    @property
     def subreddit(self) -> str:
         return self.json.get("subreddit")
 
@@ -155,6 +159,13 @@ class Post:
 
         return []
 
+    def _media_from_text(self, markdown: str) -> List[Media]:
+        r = []
+        for url_match in re.findall(MARKDOWN_PATTERN, markdown):
+            r.extend(self._parse_url(url=url_match))
+
+        return r
+
     @property
     def media(self) -> List[Media]:
         # getting the pictures in actual picture posts
@@ -168,8 +179,12 @@ class Post:
         if "selftext" in self.json:
             markdown: str = self.json["selftext"]
 
-            for url_match in re.findall(MARKDOWN_PATTERN, markdown):
-                r = self._parse_url(url=url_match)
+            r = self._media_from_text(markdown)
+            if len(r) > 0:
+                return r
+
+            for crosspost in self.json.get("crosspost_parent_list", list()):
+                r = self._media_from_text(crosspost.get("selftext", ""))
                 if len(r) > 0:
                     return r
 

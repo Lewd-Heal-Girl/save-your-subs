@@ -44,7 +44,7 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
             if r.status_code != 200:
                 weird_status_code = True
-                LOGGER.warning(f"reddit respondet with {r.status_code} at: {endpoint}")
+                LOGGER.warning(f"reddit responded with {r.status_code} at: {endpoint}")
             data: dict = r.json()
 
         except requests.RequestException:

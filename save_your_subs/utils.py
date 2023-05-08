@@ -27,7 +27,7 @@ def url_is_image(parsed_url: ParseResult) -> bool:
     path = parsed_url.path.lower()
 
     path = path.strip("/")
-    filename = path[-1]
+    filename = path.split("/")[-1]
 
     # getting the file extension by splitting by "." and "?"
     extension = filename.split(".", 1)[-1].split("?")[0].strip()

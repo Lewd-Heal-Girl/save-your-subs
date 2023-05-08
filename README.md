@@ -41,7 +41,8 @@ options:
 - [x] Downloading all Imgur Pictures from the reddit Posts.
 - [x] Downloading all pictures from all posts
 - [x] Support for all image hoster like for example catbox (this can only be done with single images though)
-- [ ] Download videos from Redgifs
+- [ ] Download videos from Redgifs.
+- [ ] Download gallerie from imgchest (?) *never heard of that one though.*
 
 # Imgur
 
@@ -95,3 +96,7 @@ This gets the data of a gallery
 	"display": []
 }
 ```
+
+# Takeaways
+
+> REDGIFS HOSTS IMAGES????????

@@ -30,6 +30,13 @@ class GenericComrade(threading.Thread):
         url = command.media.url
         n = command.n
 
+        img_format = url.split(".")[-1].split("?")[0]
+        new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
+
+        if new_path.is_file():
+            print(f"{new_path} already exists")
+            return
+
         try:
             r = self.image_session.get(url)
 
@@ -40,9 +47,6 @@ class GenericComrade(threading.Thread):
             return
 
         folder.mkdir(parents=True, exist_ok=True)
-
-        img_format = url.split(".")[-1].split("?")[0]
-        new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         print(url, "->", new_path)
         with new_path.open("wb") as f:
