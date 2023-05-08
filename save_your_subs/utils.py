@@ -10,6 +10,7 @@ class HaveSomeRestComrade:
 
 @dataclass
 class DownloadRequest:
+    id_: str
     media: Media
     folder: Path
     n: int

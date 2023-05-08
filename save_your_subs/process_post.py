@@ -38,6 +38,7 @@ class Processor:
         # print(post, len(post.media))
         for i, media in enumerate(post.media):
             new_request = DownloadRequest(
+                id_=post.id,
                 media=media,
                 n=i,
                 folder=image_path

@@ -2,9 +2,13 @@ import threading
 from queue import Queue
 import requests
 from pathlib import Path
+import logging
 
 from ..utils import HaveSomeRestComrade, DownloadRequest
 from ..reddit import ImgurMedia
+
+
+LOGGER = logging.getLogger("imgur")
 
 """
 find the client id in this java script file:
@@ -48,12 +52,15 @@ class ImgurComrade(threading.Thread):
 
         threading.Thread.__init__(self)
 
-    def download_single(self, url: str, folder: Path, n: int):
+    def download_single(self, url: str, folder: Path, n: int, id_: str):
         # print(f"downloading: {url}")
         try:
             r = self.image_session.get(url)
-            # print(r.status_code)
+            if r.status_code != 200:
+                LOGGER.warn(f"{id_}: {url} returned {r.status_code}")
+
         except requests.RequestException:
+            LOGGER.error(f"{id_}: Couldn't connect to imgur to direct download img {url}")
             return
 
         folder.mkdir(parents=True, exist_ok=True)
@@ -65,7 +72,7 @@ class ImgurComrade(threading.Thread):
         with new_path.open("wb") as f:
             f.write(r.content)
 
-    def download_galerie(self, media_id: str, folder: Path):
+    def download_galerie(self, media_id: str, folder: Path, id_: str):
         media = []
 
         url = API_ENDPOINT.format(imgur_id=media_id, client_id=CLIENT_ID)
@@ -80,19 +87,24 @@ class ImgurComrade(threading.Thread):
                 print(f"{url} responded with {r.status_code}")
 
         except requests.RequestException:
-            print("Couldn't connect to imgur")
+            LOGGER.error(f"{id_}: Couldn't conntect to imgur api.")
 
+        found_picture_in_gallery = False
         for i, image in enumerate(media):
-            self.download_single(image.get("url"), folder, i)
+            found_picture_in_gallery = True
+            self.download_single(image.get("url"), folder, i, id_)
+            
+        if not found_picture_in_gallery:
+            LOGGER.error(f"{id_}: didn't get any results for imgur gallery")
 
     def download(self, command: DownloadRequest):
         media_url = command.media.url
 
         url_frag = media_url.strip("/").split("/")[-1]
         if "." in url_frag:
-            self.download_single(url=media_url, folder=command.folder, n=command.n)
+            self.download_single(url=media_url, folder=command.folder, n=command.n, id_=command.id_)
         else:
-            self.download_galerie(media_id=command.media.id, folder=command.folder)
+            self.download_galerie(media_id=command.media.id, folder=command.folder, id_=command.id_)
 
     def run(self) -> None:
         command = self.work_queue.get()
