@@ -26,7 +26,7 @@ ENDPOINT_LIST = [
 ]
 
 
-def start_download(subreddit: str, reddit_comrades: COMRADE_COUNT) -> Tuple[Queue, List[threading.Thread]]:
+def start_download(subreddit: str, reddit_comrades: int = COMRADE_COUNT) -> Tuple[Queue, List[threading.Thread]]:
     endpoint_queue = Queue()
     for endpoint in ENDPOINT_LIST:
         endpoint_queue.put(endpoint)
