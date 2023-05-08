@@ -1,10 +1,19 @@
 from queue import Queue
+import logging
 
 from .utils import HaveSomeRestComrade
 from .imgur import spawn_imgur_comrades
 from .reddit import start_download
 from .process_post import Processor
 from .generic_hoster import spawn_generic_comrades
+
+
+logging.basicConfig(
+    filename="errors.log",
+    filemode='a',
+    format=logging.BASIC_FORMAT,
+    level=logging.DEBUG
+)
 
 
 def cli(subreddit: str):

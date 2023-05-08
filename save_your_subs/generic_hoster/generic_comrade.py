@@ -2,9 +2,12 @@ import threading
 from queue import Queue
 import requests
 from pathlib import Path
+import logging
 
 from ..utils import HaveSomeRestComrade, DownloadRequest
 
+
+LOGGER = logging.getLogger("generic")
 
 COMRAD_COUNT = 7
 
@@ -31,6 +34,7 @@ class GenericComrade(threading.Thread):
             r = self.image_session.get(url)
             print(r.status_code)
         except requests.RequestException:
+            LOGGER.error(f"{command.id_}: Couldn't connect to {url}")
             return
 
         folder.mkdir(parents=True, exist_ok=True)

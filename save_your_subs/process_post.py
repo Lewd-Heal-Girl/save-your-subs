@@ -1,9 +1,12 @@
 from pathlib import Path
 import json
 from queue import Queue
+import logging
 
 from .utils import DownloadRequest
 from .reddit import Post, ImgurMedia
+
+LOGGER = logging.getLogger("processing")
 
 DATA_PATH = Path("subs-stashed-away")
 
@@ -35,8 +38,12 @@ class Processor:
         with Path(post_path, f"{post.id}.json").open("w") as f:
             json.dump(post.json, f, indent=4)
 
+        has_media = False
+
         # print(post, len(post.media))
         for i, media in enumerate(post.media):
+            has_media = True
+            
             new_request = DownloadRequest(
                 id_=post.id,
                 media=media,
@@ -50,3 +57,6 @@ class Processor:
 
             self.general_queue.put(new_request)
             # print("\t", media.url, media.resolution)
+            
+        if not has_media:
+            LOGGER.error(f"{post.id}: Didn't find any media.")
