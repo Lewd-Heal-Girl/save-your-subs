@@ -3,8 +3,9 @@ from queue import Queue
 import requests
 from pathlib import Path
 import logging
+from urllib.parse import urlparse
 
-from ..utils import HaveSomeRestComrade, DownloadRequest
+from ..utils import HaveSomeRestComrade, DownloadRequest, url_is_image
 from ..reddit import ImgurMedia
 
 
@@ -57,7 +58,7 @@ class ImgurComrade(threading.Thread):
         try:
             r = self.image_session.get(url)
             if r.status_code != 200:
-                LOGGER.warn(f"{id_}: {url} returned {r.status_code}")
+                LOGGER.warning(f"{id_}: {url} returned {r.status_code}")
 
         except requests.RequestException:
             LOGGER.error(f"{id_}: Couldn't connect to imgur to direct download img {url}")
@@ -77,17 +78,15 @@ class ImgurComrade(threading.Thread):
 
         url = API_ENDPOINT.format(imgur_id=media_id, client_id=CLIENT_ID)
 
-        # print(f"api call: {url}")
         try:
             r = self.api_session.get(url=url)
-            # print(r.status_code)
 
             media = r.json().get("media", list())
             if r.status_code != 200:
-                print(f"{url} responded with {r.status_code}")
+                LOGGER.warning(f"{id_}: {url} responded with {r.status_code}")
 
         except requests.RequestException:
-            LOGGER.error(f"{id_}: Couldn't conntect to imgur api.")
+            LOGGER.error(f"{id_}: Couldn't connect to imgur api.")
 
         found_picture_in_gallery = False
         for i, image in enumerate(media):
@@ -100,8 +99,7 @@ class ImgurComrade(threading.Thread):
     def download(self, command: DownloadRequest):
         media_url = command.media.url
 
-        url_frag = media_url.strip("/").split("/")[-1]
-        if "." in url_frag:
+        if url_is_image(urlparse(media_url)):
             self.download_single(url=media_url, folder=command.folder, n=command.n, id_=command.id_)
         else:
             self.download_galerie(media_id=command.media.id, folder=command.folder, id_=command.id_)

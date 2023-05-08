@@ -3,10 +3,16 @@ from datetime import datetime
 from typing import List, Tuple
 from urllib.parse import urlparse
 import logging
+import re
 
 from slugify import slugify
 
+from ..utils import url_is_image
+
 LOGGER = logging.getLogger("reddit")
+MARKDOWN_PATTERN = r"\[.*?\]\((.*?)\)"
+
+
 
 
 class Media:
@@ -110,46 +116,60 @@ class Post:
         return slugify(f"{self.id} {self.title}")[:254]
 
     def _get_reddit_gallery(self, json: dict):
-
         media_id_list = [item.get("media_id") for item in json.get("gallery_data", dict()).get("items", [])]
         media_metadata = json.get("media_metadata", {})
 
         return [RedditGallery(json=media_metadata.get(str(_id), dict())) for _id in media_id_list]
 
-    @property
-    def media(self) -> List[Media]:
-        if "url_overridden_by_dest" in self.json:
-            url_overridden_by_dest: str = self.json.get("url_overridden_by_dest")
-            parsed_url = urlparse(url_overridden_by_dest)
+    def _parse_url(self, url: str) -> List[Media]:
+        parsed_url = urlparse(url)
 
-            # check for imgur
-            if parsed_url.netloc == "imgur.com" or parsed_url.netloc == "i.imgur.com":
-                return [ImgurMedia(url=url_overridden_by_dest)]
+        # check for imgur
+        if parsed_url.netloc == "imgur.com" or parsed_url.netloc == "i.imgur.com":
+            return [ImgurMedia(url=url)]
 
-            # check for reddit gallery
-            if "reddit" in parsed_url.netloc and parsed_url.path.startswith("/gallery"):
-                r = self._get_reddit_gallery(self.json)
+        # check for reddit gallery
+        if "reddit" in parsed_url.netloc and parsed_url.path.startswith("/gallery"):
+            r = self._get_reddit_gallery(self.json)
+            if len(r) > 0:
+                return r
+
+            for crosspost in self.json.get("crosspost_parent_list", list()):
+                r = self._get_reddit_gallery(crosspost)
                 if len(r) > 0:
                     return r
 
-                for crosspost in self.json.get("crosspost_parent_list", list()):
-                    r = self._get_reddit_gallery(crosspost)
-                    if len(r) > 0:
-                        return r
+        # check for single reddit post (ez)
+        if parsed_url.netloc == "i.redd.it" and url_is_image(parsed_url):
+            return [Media(
+                url=url,
+                id=parsed_url.path.strip("/").split(".")[0]
+            )]
 
-            # check for single reddit post (ez)
-            if parsed_url.netloc == "i.redd.it":
-                return [Media(
-                    url=url_overridden_by_dest,
-                    id=parsed_url.path.strip("/").split(".")[0]
-                )]
-                
-            # check for any other image hoster
-            if "." in parsed_url.path.strip("/").split("/")[-1]:
-                return [Media(
-                    url=url_overridden_by_dest,
-                    id=None
-                )]
+        # check for any other image hoster
+        if url_is_image(parsed_url):
+            return [Media(
+                url=url,
+                id=None
+            )]
+
+    @property
+    def media(self) -> List[Media]:
+        # getting the pictures in actual picture posts
+        if "url_overridden_by_dest" in self.json:
+            url_overridden_by_dest: str = self.json["url_overridden_by_dest"]
+            r = self._parse_url(url_overridden_by_dest)
+            if len(r) > 0:
+                return r
+
+        # scanning the text of text post for valid links
+        if "selftext" in self.json:
+            markdown: str = self.json["selftext"]
+
+            for url_match in re.findall(MARKDOWN_PATTERN, markdown):
+                r = self._parse_url(url=url_match)
+                if len(r) > 0:
+                    return r
 
         return []
 

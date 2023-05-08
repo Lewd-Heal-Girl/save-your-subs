@@ -32,7 +32,9 @@ class GenericComrade(threading.Thread):
 
         try:
             r = self.image_session.get(url)
-            print(r.status_code)
+
+            if r.status_code != 200:
+                LOGGER.warning(f"{command.id_}: {url} responded with {r.status_code}")
         except requests.RequestException:
             LOGGER.error(f"{command.id_}: Couldn't connect to {url}")
             return

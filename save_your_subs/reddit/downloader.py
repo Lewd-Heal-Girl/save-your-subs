@@ -29,22 +29,22 @@ def download_subreddit(subreddit: str, result_queue: Queue):
         weird_status_code = False
         data = dict()
 
-        try:
-            if last_post is not None:
-                last_id = last_post.id
+        if last_post is not None:
+            last_id = last_post.id
 
-            endpoint = ENDPOINT.format(
-                subreddit=subreddit,
-                limit=limit,
-                last_id=last_id,
-                count=total_posts
-            )
-            
+        endpoint = ENDPOINT.format(
+            subreddit=subreddit,
+            limit=limit,
+            last_id=last_id,
+            count=total_posts
+        )
+
+        try:
             r = session.get(endpoint)
 
             if r.status_code != 200:
                 weird_status_code = True
-                LOGGER.warn(f"reddit respondet with {r.status_code} at: {endpoint}")
+                LOGGER.warning(f"reddit respondet with {r.status_code} at: {endpoint}")
             data: dict = r.json()
 
         except requests.RequestException:
