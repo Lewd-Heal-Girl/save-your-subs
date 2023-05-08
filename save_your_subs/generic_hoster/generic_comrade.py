@@ -1,5 +1,7 @@
 import threading
 from queue import Queue
+from urllib.parse import urlparse
+
 import requests
 from pathlib import Path
 import logging
@@ -30,11 +32,11 @@ class GenericComrade(threading.Thread):
         url = command.media.url
         n = command.n
 
-        img_format = url.split(".", 1)[-1].split("?")[0]
+        img_format = urlparse(url).path.split(".", 1)[-1].split("?")[0]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         if new_path.is_file():
-            print(f"{new_path} already exists")
+            # print(f"{new_path} already exists")
             return
 
         try:

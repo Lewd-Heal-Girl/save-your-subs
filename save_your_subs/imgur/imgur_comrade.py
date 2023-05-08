@@ -54,11 +54,11 @@ class ImgurComrade(threading.Thread):
         threading.Thread.__init__(self)
 
     def download_single(self, url: str, folder: Path, n: int, id_: str):
-        img_format = url.split(".", 1)[-1].split("?")[0]
+        img_format = urlparse(url).path.split(".", 1)[-1].split("?")[0]
         new_path = Path(folder, f"{str(n).zfill(2)}.{img_format}")
 
         if new_path.is_file():
-            print(f"{new_path} already exists")
+            # print(f"{new_path} already exists")
             return
 
         try:

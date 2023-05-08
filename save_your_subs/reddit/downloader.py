@@ -65,7 +65,7 @@ class RedditComrade(threading.Thread):
 
             for post in data.get("data", {}).get("children", []):
                 last_post = Post(json=post.get("data", {}))
-                print(last_post)
+                # print(last_post)
                 self.result_queue.put(last_post)
 
                 total_posts += 1
