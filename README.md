@@ -41,6 +41,7 @@ options:
 - [x] Downloading all Imgur Pictures from the reddit Posts.
 - [x] Downloading all pictures from all posts
 - [x] Support for all image hoster like for example catbox (this can only be done with single images though)
+- [ ] Download videos from Redgifs
 
 # Imgur
 
