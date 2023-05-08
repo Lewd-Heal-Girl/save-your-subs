@@ -1,7 +1,10 @@
+import logging
 from queue import Queue
 import requests
 
 from .classes import Post
+
+LOGGER = logging.getLogger("reddit")
 
 MAX_LIMIT = 100
 ENDPOINT = "https://www.reddit.com/r/{subreddit}/new.json?limit={limit}&after={last_id}&count={count}"
@@ -23,27 +26,32 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
     last_post = None
     while True:
+        weird_status_code = False
         data = dict()
 
         try:
             if last_post is not None:
                 last_id = last_post.id
 
-            r = session.get(ENDPOINT.format(
+            endpoint = ENDPOINT.format(
                 subreddit=subreddit,
                 limit=limit,
                 last_id=last_id,
                 count=total_posts
-            ))
+            )
+            
+            r = session.get(endpoint)
 
             if r.status_code != 200:
-                print(r.status_code)
+                weird_status_code = True
+                LOGGER.warn(f"reddit respondet with {r.status_code} at: {endpoint}")
             data: dict = r.json()
 
         except requests.RequestException:
-            print("reddit request failed")
+            LOGGER.error(f"Reddit request failed: {endpoint}")
 
         if data.get("kind") != "Listing":
+            LOGGER.warning(f"response type was not 'Listing' {data}")
             continue
 
         _last_post = last_post
@@ -55,11 +63,11 @@ def download_subreddit(subreddit: str, result_queue: Queue):
 
             total_posts += 1
 
-        if _last_post == last_post:
+        if _last_post == last_post and not weird_status_code:
             print("The last Post was reached:")
             print(last_post)
-            print(last_post.id)
-            print(f"total posts: {total_posts}")
+            LOGGER.info(f"{last_post.id}: last post")
+            LOGGER.info(f"Total posts: {total_posts}")
             break
 
     print("Terminating the reddit thread.")
