@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import ParseResult
+from typing import TYPE_CHECKING
 
-from .reddit import Media
+if TYPE_CHECKING:
+    from .reddit import Media
 
 
 class HaveSomeRestComrade:
@@ -12,7 +14,7 @@ class HaveSomeRestComrade:
 @dataclass
 class DownloadRequest:
     id_: str
-    media: Media
+    media: "Media"
     folder: Path
     n: int
 

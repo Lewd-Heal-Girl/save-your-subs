@@ -153,6 +153,8 @@ class Post:
                 id=None
             )]
 
+        return []
+
     @property
     def media(self) -> List[Media]:
         # getting the pictures in actual picture posts
