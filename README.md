@@ -40,7 +40,7 @@ options:
 - [x] Download the Metadata from every reddit Post on a subreddit.
 - [x] Downloading all Imgur Pictures from the reddit Posts.
 - [x] Downloading all pictures from all posts
-- [ ] Support for all image hoster like for example catbox (this can only be done with single images though)
+- [x] Support for all image hoster like for example catbox (this can only be done with single images though)
 
 # Imgur
 

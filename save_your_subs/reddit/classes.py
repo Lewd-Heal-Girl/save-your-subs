@@ -143,6 +143,13 @@ class Post:
                     url=url_overridden_by_dest,
                     id=parsed_url.path.strip("/").split(".")[0]
                 )]
+                
+            # check for any other image hoster
+            if "." in parsed_url.path.strip("/").split("/")[-1]:
+                return [Media(
+                    url=url_overridden_by_dest,
+                    id=None
+                )]
 
         return []
 
