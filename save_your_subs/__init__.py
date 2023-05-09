@@ -3,7 +3,7 @@ import logging
 
 from .utils import HaveSomeRestComrade
 from .imgur import spawn_imgur_comrades
-from .reddit import start_download
+from .reddit import start_download, posts_from_backup
 from .process_post import Processor
 from .generic_hoster import spawn_generic_comrades
 
@@ -18,6 +18,10 @@ logging.basicConfig(
 def cli(subreddit: str, export: bool = False):
     if not subreddit.startswith("r/"):
         print(f"your sub needs to start with r/: {subreddit}")
+        return
+    
+    if export:
+        posts_from_backup(subreddit=subreddit.replace("r/", "", 1))
         return
 
     post_queue, reddit_thread_list = start_download(subreddit.replace("r/", "", 1))
