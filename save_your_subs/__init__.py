@@ -15,7 +15,7 @@ logging.basicConfig(
 )
 
 
-def cli(subreddit: str):
+def cli(subreddit: str, export: bool = False):
     if not subreddit.startswith("r/"):
         print(f"your sub needs to start with r/: {subreddit}")
         return
