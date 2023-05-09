@@ -20,5 +20,5 @@ class PostIteator:
         
         for post_file in self.data_path.glob("*.json"):
             with post_file.open("r") as f:
-                yield Post(json=json.load(f))
+                yield Post(json=json.load(f), data_path=self.data_path)
         

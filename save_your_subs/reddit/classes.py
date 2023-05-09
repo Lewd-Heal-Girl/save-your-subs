@@ -4,6 +4,7 @@ from typing import List, Tuple
 from urllib.parse import urlparse
 import logging
 import re
+from pathlib import Path
 
 from slugify import slugify
 
@@ -86,6 +87,7 @@ class ImgurMedia(Media):
 @dataclass
 class Post:
     json: dict
+    data_path: Path = None
 
     @property
     def url(self) -> str:
@@ -119,8 +121,27 @@ class Post:
     def folder(self) -> str:
         return slugify(f"{self.id} {self.title}")[:254]
 
+    @property
+    def image_path(self) -> Path:
+        return Path(self.data_path, self.folder)
+    
+    @property
+    def image_count(self) -> int:
+        return len(list(self.image_path.glob("*")))
+
     def _get_reddit_gallery(self, json: dict):
-        media_id_list = [item.get("media_id") for item in json.get("gallery_data", dict()).get("items", [])]
+        media_id_list = []
+        
+        gallery_data = json.get("gallery_data", {})
+        if gallery_data is None:
+            return []
+        
+        
+        for item in gallery_data.get("items", list()):
+            if item is None:
+                continue
+            media_id_list.append(item.get("media_id"))
+            
         media_metadata = json.get("media_metadata", {})
 
         return [RedditGallery(json=media_metadata.get(str(_id), dict())) for _id in media_id_list]
