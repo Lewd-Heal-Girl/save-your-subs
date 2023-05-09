@@ -126,8 +126,12 @@ class Post:
         return Path(self.data_path, self.folder)
     
     @property
+    def images_list(self) -> List[Path]:
+        return list(self.image_path.glob("*"))
+    
+    @property
     def image_count(self) -> int:
-        return len(list(self.image_path.glob("*")))
+        return len(self.images_list)
 
     def _get_reddit_gallery(self, json: dict):
         media_id_list = []

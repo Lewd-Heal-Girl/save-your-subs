@@ -16,8 +16,6 @@ logging.basicConfig(
 
 def export_backup(subreddit: str):
     for post in PostIteator(subreddit=subreddit):
-        print(post.image_count)
-        if post.image_count > 0:
             print(post.image_count, post.image_path, post)
 
 

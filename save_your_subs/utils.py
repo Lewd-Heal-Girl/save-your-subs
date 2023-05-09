@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 DATA_PATH = Path("subs-stashed-away")
 POST_FOLDER_NAME = "posts"
+IMAGE_FOLDER_NAME = "images"
 
 class HaveSomeRestComrade:
     pass
