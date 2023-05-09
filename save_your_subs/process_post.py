@@ -3,12 +3,12 @@ import json
 from queue import Queue
 import logging
 
-from .utils import DownloadRequest
+from .utils import DownloadRequest, DATA_PATH, POST_FOLDER_NAME
 from .reddit import Post, ImgurMedia
 
 LOGGER = logging.getLogger("processing")
 
-DATA_PATH = Path("subs-stashed-away")
+
 
 
 class Processor:
@@ -29,7 +29,7 @@ class Processor:
         sub_path = Path(self.data_path, post.subreddit)
         sub_path.mkdir(parents=True, exist_ok=True)
 
-        post_path = Path(sub_path, "posts")
+        post_path = Path(sub_path, POST_FOLDER_NAME)
         post_path.mkdir(parents=True, exist_ok=True)
 
         image_path = Path(sub_path, "images", post.folder)

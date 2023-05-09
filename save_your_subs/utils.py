@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .reddit import Media
 
+DATA_PATH = Path("subs-stashed-away")
+POST_FOLDER_NAME = "posts"
 
 class HaveSomeRestComrade:
     pass
