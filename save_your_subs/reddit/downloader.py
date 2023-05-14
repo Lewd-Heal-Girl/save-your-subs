@@ -31,7 +31,7 @@ class RedditComrade(threading.Thread):
 
         last_id = ''
 
-        last_post = None
+        last_post = Post(json={})
         while True:
             weird_status_code = False
             data = dict()
