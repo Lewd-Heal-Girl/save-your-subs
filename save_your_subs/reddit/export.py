@@ -29,7 +29,7 @@ class PostIteator:
 def get_dataframe(subreddit: str) -> pd.DataFrame:
     return pd.DataFrame(post.get_items(id=str(i).zfill(4)) for i, post in enumerate(PostIteator(subreddit=subreddit)))
 
-def get_whole_dataframe(subreddit: str) -> pd.DataFrame:
+def get_whole_dataframe(subreddit: str, image_folder: Path) -> pd.DataFrame:
     return pd.DataFrame(post.get_items(
             id=str(i).zfill(4), 
             hosts=[media.url for media in post.media], 
@@ -41,13 +41,13 @@ def export(subreddit: str):
     clean = Path(DATA_PATH, subreddit, CLEAN_FOLDER_NAME)
     clean.mkdir(parents=True, exist_ok=True)
     
+    image_path = Path(clean, IMAGE_FOLDER_NAME)
+    image_path.mkdir(exist_ok=True, parents=True)
+    
     print("Saving csv file.")
     get_dataframe(subreddit=subreddit).to_csv(Path(clean, f"{subreddit}.csv"), index=False)
     print("Saving json file.")
-    get_whole_dataframe(subreddit=subreddit).to_json(Path(clean, f"{subreddit}.json"))
-    
-    image_path = Path(clean, IMAGE_FOLDER_NAME)
-    image_path.mkdir(exist_ok=True, parents=True)
+    get_whole_dataframe(subreddit=subreddit, image_folder=image_path).to_json(Path(clean, f"{subreddit}.json"))
     
     json_path = Path(clean, POST_FOLDER_NAME)
     json_path.mkdir(exist_ok=True, parents=True)
