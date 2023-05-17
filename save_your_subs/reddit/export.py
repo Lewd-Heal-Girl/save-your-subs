@@ -2,6 +2,7 @@ from typing import List, Iterable
 from pathlib import Path
 import json
 import pandas as pd
+import shutil
 
 from ..utils import DATA_PATH, POST_FOLDER_NAME, IMAGE_FOLDER_NAME, CLEAN_FOLDER_NAME
 from .classes import Post
@@ -33,4 +34,19 @@ def export(subreddit: str):
     clean.mkdir(parents=True, exist_ok=True)
     
     get_dataframe(subreddit=subreddit).to_csv(Path(clean, f"{subreddit}.csv"), index=False)
+    
+    image_path = Path(clean, IMAGE_FOLDER_NAME)
+    image_path.mkdir(exist_ok=True, parents=True)
+    
+    json_path = Path(clean, POST_FOLDER_NAME)
+    json_path.mkdir(exist_ok=True, parents=True)
+    
+    for i, post in enumerate(PostIteator(subreddit=subreddit)):
+        for j, image in enumerate(post.images_list):
+            new_image_path = Path(image_path, f"{str(i).zfill(4)}_{str(j).zfill(2)}.{image.suffix}")
+            
+            shutil.copy(str(image), str(new_image_path))
+        
+        with Path(json_path, f"{str(i).zfill(4)}.json").open("w") as f:
+            json.dump(post.json, f)
         
