@@ -29,11 +29,22 @@ class PostIteator:
 def get_dataframe(subreddit: str) -> pd.DataFrame:
     return pd.DataFrame(post.get_items(id=str(i).zfill(4)) for i, post in enumerate(PostIteator(subreddit=subreddit)))
 
+def get_whole_dataframe(subreddit: str) -> pd.DataFrame:
+    return pd.DataFrame(post.get_items(
+            id=str(i).zfill(4), 
+            hosts=[media.url for media in post.media], 
+            local_images=[f"{str(i).zfill(4)}_{str(j).zfill(2)}{image.suffix}" for j, image in enumerate(post.images_list)]
+        ) for i, post in enumerate(PostIteator(subreddit=subreddit)))
+
+
 def export(subreddit: str):
     clean = Path(DATA_PATH, subreddit, CLEAN_FOLDER_NAME)
     clean.mkdir(parents=True, exist_ok=True)
     
+    print("Saving csv file.")
     get_dataframe(subreddit=subreddit).to_csv(Path(clean, f"{subreddit}.csv"), index=False)
+    print("Saving json file.")
+    get_whole_dataframe(subreddit=subreddit).to_json(Path(clean, f"{subreddit}.json"))
     
     image_path = Path(clean, IMAGE_FOLDER_NAME)
     image_path.mkdir(exist_ok=True, parents=True)
@@ -41,9 +52,10 @@ def export(subreddit: str):
     json_path = Path(clean, POST_FOLDER_NAME)
     json_path.mkdir(exist_ok=True, parents=True)
     
+    print("Copying images.")
     for i, post in enumerate(PostIteator(subreddit=subreddit)):
         for j, image in enumerate(post.images_list):
-            new_image_path = Path(image_path, f"{str(i).zfill(4)}_{str(j).zfill(2)}.{image.suffix}")
+            new_image_path = Path(image_path, f"{str(i).zfill(4)}_{str(j).zfill(2)}{image.suffix}")
             
             shutil.copy(str(image), str(new_image_path))
         
