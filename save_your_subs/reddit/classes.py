@@ -217,3 +217,15 @@ class Post:
 
     def __str__(self):
         return f"{self.date} r/{self.subreddit} - {self.title} ({self.flair}) by u/{self.artist}"
+
+    def get_items(self, **kwargs) -> dict:
+        return {
+            'subreddit': self.subreddit,
+            'title': self.title,
+            'artist': self.artist,
+            'flair': self.flair,
+            'url': self.url,
+            **kwargs,
+            'images': self.image_count,
+            'reddit_id': self.id
+        }

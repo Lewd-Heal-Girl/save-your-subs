@@ -3,7 +3,7 @@ import logging
 
 from .utils import HaveSomeRestComrade
 from .imgur import spawn_imgur_comrades
-from .reddit import start_download, PostIteator
+from .reddit import start_download, export
 from .process_post import Processor
 from .generic_hoster import spawn_generic_comrades
 
@@ -14,9 +14,10 @@ logging.basicConfig(
     level=logging.INFO
 )
 
+
+
 def export_backup(subreddit: str):
-    for post in PostIteator(subreddit=subreddit):
-            print(post.image_count, post.image_path, post)
+    export(subreddit)
 
 
 def cli(subreddit: str, export: bool = False):
